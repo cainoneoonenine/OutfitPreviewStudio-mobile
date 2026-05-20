@@ -1,0 +1,18 @@
+# Local notes / source text
+wenben.txt
+wenbenr18.txt
+
+# Generated or bulky image exports
+PNG/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and temporary files
+.vscode/
+.idea/
+*.log
+*.tmp
+*.bak
