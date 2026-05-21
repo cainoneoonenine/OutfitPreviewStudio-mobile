@@ -77,6 +77,12 @@ button {
   padding-bottom: 0;
 }
 
+body[data-page="list"] .page-shell,
+body[data-page="detail"] .page-shell {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .topbar {
   position: sticky;
   top: 0;
@@ -1372,6 +1378,12 @@ button {
     padding-left: 0;
   }
 
+  body[data-page="list"] .page-shell,
+  body[data-page="detail"] .page-shell {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
   .brand {
     max-width: 62%;
     font-size: 0.92rem;
@@ -1417,6 +1429,12 @@ button {
   }
 
   .home-shell {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  body[data-page="list"] .page-shell,
+  body[data-page="detail"] .page-shell {
     padding-right: 0;
     padding-left: 0;
   }
