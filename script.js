@@ -1,5 +1,8 @@
 const DATA_URL = "data/outfits.json";
 const STORAGE_KEY = "outfit-preview-studio-saved";
+const LOOK_RETURN_KEY = "outfit-preview-studio-return-look";
+const LOOK_RETURN_PARAM = "look";
+const LOOK_RETURN_URL_PARAM = "returnTo";
 const DEFAULT_CATEGORIES = ["全部", "春季", "夏季", "秋季", "冬季"];
 const SEASON_ALIASES = {
   春: "春季",
@@ -7,6 +10,8 @@ const SEASON_ALIASES = {
   秋: "秋季",
   冬: "冬季"
 };
+
+primeLookRestoration();
 
 document.addEventListener("DOMContentLoaded", () => {
   const page = document.body.dataset.page;
@@ -205,6 +210,7 @@ async function initListPage() {
   const filters = document.querySelector("#category-filters");
   const search = document.querySelector("#outfit-search");
   const status = document.querySelector("#list-status");
+  let returnLookId = getReturnLookId();
 
   try {
     const outfits = await fetchOutfits();
@@ -219,6 +225,11 @@ async function initListPage() {
         updateList();
       });
       renderOutfitList(list, sortOutfits(filterOutfits(outfits, state)));
+
+      if (returnLookId) {
+        restoreLookPosition(list, returnLookId);
+        returnLookId = "";
+      }
     };
 
     if (search) {
@@ -228,8 +239,17 @@ async function initListPage() {
       });
     }
 
+    window.addEventListener("pageshow", () => {
+      const restoredLookId = getReturnLookId();
+
+      if (restoredLookId) {
+        restoreLookPosition(list, restoredLookId);
+      }
+    });
+
     updateList();
   } catch (error) {
+    completeLookRestoration();
     showDataError(status);
   }
 }
@@ -370,6 +390,7 @@ function renderOutfitList(container, outfits) {
   container.innerHTML = outfits.map((outfit) => renderOutfitCard(outfit, "toggle")).join("");
   wireImageFallbacks(container);
   wireSaveButtons(container);
+  wireLookReturnLinks(container);
 }
 
 function renderFavorites(container, outfits) {
@@ -383,6 +404,7 @@ function renderFavorites(container, outfits) {
 
   container.innerHTML = savedOutfits.map((outfit) => renderOutfitCard(outfit, "remove")).join("");
   wireImageFallbacks(container);
+  wireLookReturnLinks(container);
 
   container.querySelectorAll("[data-action='remove-save']").forEach((button) => {
     button.addEventListener("click", () => {
@@ -432,6 +454,7 @@ async function openFavoritesOverlay() {
     const outfits = await fetchOutfits();
     body.innerHTML = renderFavoritesOverlayList(outfits);
     wireImageFallbacks(body);
+    wireLookReturnLinks(body);
     wireFavoriteOverlayRemoveButtons(body, outfits);
   } catch (error) {
     body.innerHTML = `<div class="notice notice-error">无法读取灵感。</div>`;
@@ -450,7 +473,7 @@ function renderFavoritesOverlayList(outfits) {
     <div class="favorite-look-list">
       ${savedOutfits.map((outfit) => `
         <div class="favorite-look-row">
-          <a class="favorite-look-link" href="outfit.html?id=${encodeURIComponent(outfit.id)}">
+          <a class="favorite-look-link" href="outfit.html?id=${encodeURIComponent(outfit.id)}" data-return-look-id="${escapeAttribute(outfit.id)}">
             <img src="${escapeAttribute(outfit.thumb || outfit.large)}" alt="${escapeAttribute(outfit.title)}" loading="lazy">
             <div class="favorite-look-copy">
               <strong>${escapeHtml(outfit.title)}</strong>
@@ -472,6 +495,7 @@ function wireFavoriteOverlayRemoveButtons(container, outfits) {
       removeSavedLook(button.dataset.id);
       container.innerHTML = renderFavoritesOverlayList(outfits);
       wireImageFallbacks(container);
+      wireLookReturnLinks(container);
       wireFavoriteOverlayRemoveButtons(container, outfits);
       updateSaveButtons(button.dataset.id);
     });
@@ -508,7 +532,7 @@ function renderOutfitCard(outfit, mode) {
   ` : "";
 
   return `
-    <article class="outfit-card">
+    <article class="outfit-card" id="${escapeAttribute(outfit.id)}" data-outfit-id="${escapeAttribute(outfit.id)}">
       <div class="image-frame" aria-label="${escapeAttribute(outfit.title)}">
         <img src="${escapeAttribute(outfit.large || outfit.thumb)}" alt="${escapeAttribute(outfit.title)}" loading="lazy">
       </div>
@@ -517,7 +541,7 @@ function renderOutfitCard(outfit, mode) {
           <button class="detail-heart-button card-heart-button${saved ? " is-active" : ""}" type="button" data-action="toggle-save" data-id="${escapeAttribute(outfit.id)}" aria-label="${saved ? "取消收藏" : "收藏"}" aria-pressed="${saved}">
             ${saved ? "&#9829;" : "&#9825;"}
           </button>
-          <a class="card-view-more" href="${detailHref}">VIEW MORE</a>
+          <a class="card-view-more" href="${detailHref}" data-return-look-id="${escapeAttribute(outfit.id)}">VIEW MORE</a>
         </div>
         <h2 class="card-title">${escapeHtml(outfit.title)}</h2>
         ${renderTags(outfit.tags)}
@@ -542,7 +566,7 @@ function renderDetail(outfit) {
           <button class="detail-heart-button card-heart-button${saved ? " is-active" : ""}" type="button" data-action="toggle-save" data-id="${escapeAttribute(outfit.id)}" aria-label="${saved ? "取消收藏" : "收藏"}" aria-pressed="${saved}">
             ${saved ? "&#9829;" : "&#9825;"}
           </button>
-          <a class="card-view-more detail-back-action" href="list.html">BACK</a>
+          <a class="card-view-more detail-back-action" href="list.html?${LOOK_RETURN_PARAM}=${encodeURIComponent(outfit.id)}">BACK</a>
         </div>
         <h1 class="detail-title">${escapeHtml(outfit.title)}</h1>
         ${renderTags(outfit.tags)}
@@ -622,10 +646,20 @@ function wireDetailBackLink(scope) {
   }
 
   backLink.addEventListener("click", (event) => {
+    const outfitId = new URLSearchParams(window.location.search).get("id");
+    const returnUrl = createLookReturnUrl(outfitId);
     const referrer = document.referrer ? new URL(document.referrer) : null;
     const canReturnToPreviousPage = window.history.length > 1
       && referrer
       && referrer.origin === window.location.origin;
+
+    rememberReturnLook(outfitId);
+
+    if (returnUrl) {
+      event.preventDefault();
+      window.location.href = returnUrl;
+      return;
+    }
 
     if (!canReturnToPreviousPage) {
       return;
@@ -634,6 +668,146 @@ function wireDetailBackLink(scope) {
     event.preventDefault();
     window.history.back();
   });
+}
+
+function wireLookReturnLinks(scope) {
+  scope.querySelectorAll("[data-return-look-id]").forEach((link) => {
+    link.addEventListener("click", () => {
+      prepareLookDetailLink(link);
+    });
+  });
+}
+
+function prepareLookDetailLink(link) {
+  const id = link.dataset.returnLookId;
+
+  rememberReturnLook(id);
+
+  if (!id) {
+    return;
+  }
+
+  const detailUrl = new URL(link.getAttribute("href"), window.location.href);
+  const returnUrl = new URL(window.location.href);
+  returnUrl.searchParams.set(LOOK_RETURN_PARAM, id);
+  detailUrl.searchParams.set(LOOK_RETURN_PARAM, id);
+  detailUrl.searchParams.set(LOOK_RETURN_URL_PARAM, `${returnUrl.pathname}${returnUrl.search}${returnUrl.hash}`);
+  link.href = detailUrl.href;
+}
+
+function rememberReturnLook(id) {
+  if (!id) {
+    return;
+  }
+
+  try {
+    sessionStorage.setItem(LOOK_RETURN_KEY, id);
+  } catch (error) {
+    // Ignore storage failures; the fallback query parameter still works.
+  }
+}
+
+function getReturnLookId() {
+  const lookFromUrl = new URLSearchParams(window.location.search).get(LOOK_RETURN_PARAM);
+
+  if (lookFromUrl) {
+    return lookFromUrl;
+  }
+
+  try {
+    const lookFromStorage = sessionStorage.getItem(LOOK_RETURN_KEY) || "";
+    sessionStorage.removeItem(LOOK_RETURN_KEY);
+    return lookFromStorage;
+  } catch (error) {
+    return "";
+  }
+}
+
+function peekReturnLookId() {
+  const lookFromUrl = new URLSearchParams(window.location.search).get(LOOK_RETURN_PARAM);
+
+  if (lookFromUrl) {
+    return lookFromUrl;
+  }
+
+  try {
+    return sessionStorage.getItem(LOOK_RETURN_KEY) || "";
+  } catch (error) {
+    return "";
+  }
+}
+
+function createLookReturnUrl(id) {
+  const returnTo = new URLSearchParams(window.location.search).get(LOOK_RETURN_URL_PARAM);
+
+  if (!returnTo || !id) {
+    return "";
+  }
+
+  try {
+    const url = new URL(returnTo, window.location.origin);
+
+    if (url.origin !== window.location.origin) {
+      return "";
+    }
+
+    url.searchParams.set(LOOK_RETURN_PARAM, id);
+    return url.href;
+  } catch (error) {
+    return "";
+  }
+}
+
+function restoreLookPosition(container, id) {
+  const target = [...container.querySelectorAll("[data-outfit-id]")]
+    .find((card) => card.dataset.outfitId === id);
+
+  if (!target) {
+    completeLookRestoration();
+    return;
+  }
+
+  const scrollToTarget = () => {
+    const rect = target.getBoundingClientRect();
+    const top = rect.top + window.scrollY - Math.max((window.innerHeight - rect.height) / 2, 0);
+    const scrollTop = Math.max(top, 0);
+    const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+
+    document.documentElement.style.scrollBehavior = "auto";
+    document.scrollingElement.scrollTop = scrollTop;
+
+    if (typeof window.scrollTo === "function") {
+      window.scrollTo({ top: scrollTop, left: 0, behavior: "auto" });
+    }
+
+    document.documentElement.style.scrollBehavior = previousScrollBehavior;
+  };
+
+  const finish = () => {
+    scrollToTarget();
+    completeLookRestoration();
+  };
+
+  const schedule = typeof window.requestAnimationFrame === "function"
+    ? window.requestAnimationFrame
+    : (callback) => window.setTimeout(callback, 0);
+
+  schedule(() => {
+    scrollToTarget();
+    window.setTimeout(finish, 80);
+  });
+}
+
+function primeLookRestoration() {
+  if (document.body?.dataset.page !== "list" || !peekReturnLookId()) {
+    return;
+  }
+
+  document.body.classList.add("is-restoring-look");
+}
+
+function completeLookRestoration() {
+  document.body?.classList.remove("is-restoring-look");
 }
 
 function openPieceModal(pieces, startIndex = 0) {
