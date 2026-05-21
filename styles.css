@@ -1218,7 +1218,7 @@ body[data-page="list"] .lookbook-section > .status-message {
 }
 
 .piece-thumb-button {
-  align-self: start;
+  align-self: center;
   width: 54px;
   aspect-ratio: 1 / 1;
   padding: 0;
