@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Outfit Preview Studio</title>
   <meta name="description" content="一个移动端优先的服装图册，用来展示 AI 模特上身穿搭效果。">
-  <link rel="stylesheet" href="styles.css?v=20260521-headreadable">
-  <script src="script.js?v=20260521-favremove" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260521-heroshade">
+  <script src="script.js?v=20260521-home-nohead2" defer></script>
 </head>
 <body data-page="home">
   <div class="page-shell home-shell">
-    <header class="topbar">
-      <a class="brand" href="index.html" aria-label="Outfit Preview Studio 首页">Outfit Preview Studio</a>
-    </header>
-
     <main class="home-main">
       <section class="hero home-hero" aria-labelledby="hero-title">
-        <img class="hero-image" src="images/look-001/large/model.webp" alt="AI 模特穿搭预览" loading="lazy">
+        <div class="hero-carousel" id="hero-carousel" aria-hidden="true">
+          <div class="hero-carousel-track">
+            <img class="hero-image" src="images/look-001/large/model.webp" alt="" loading="eager">
+          </div>
+        </div>
         <div class="hero-shade"></div>
         <div class="hero-content">
           <h1 id="hero-title"><span>Outfit Preview</span><span>Studio</span></h1>

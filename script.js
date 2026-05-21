@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     initListPage();
   }
 
+  if (page === "home") {
+    initHomePage();
+  }
+
   if (page === "detail") {
     initDetailPage();
   }
@@ -25,6 +29,176 @@ document.addEventListener("DOMContentLoaded", () => {
     initFavoritesPage();
   }
 });
+
+async function initHomePage() {
+  const carousel = document.querySelector("#hero-carousel");
+
+  if (!carousel) {
+    return;
+  }
+
+  try {
+    const outfits = await fetchOutfits();
+    const slides = sortOutfits(outfits)
+      .map((outfit) => ({
+        id: outfit.id,
+        title: outfit.title || "",
+        src: outfit.large || outfit.thumb
+      }))
+      .filter((slide) => slide.src);
+
+    initHeroCarousel(carousel, slides);
+  } catch (error) {
+    // Keep the static fallback image if the catalog cannot be loaded.
+  }
+}
+
+function initHeroCarousel(carousel, slides) {
+  const track = carousel.querySelector(".hero-carousel-track");
+
+  if (!track || !slides.length) {
+    return;
+  }
+
+  let deck = shuffleSlides(slides);
+  let index = 0;
+  let current = deck[index];
+  let previous = null;
+  let isAnimating = false;
+  let timer = null;
+  let touchStartX = 0;
+  let pointerStartX = 0;
+
+  renderSingleHeroSlide(track, current);
+
+  const restartTimer = () => {
+    window.clearInterval(timer);
+    timer = window.setInterval(() => {
+      goToHeroSlide("next");
+    }, 3000);
+  };
+
+  const getNextSlide = () => {
+    previous = current;
+    index += 1;
+
+    if (index >= deck.length) {
+      deck = shuffleSlides(slides, current.id);
+      index = 0;
+    }
+
+    current = deck[index];
+    return current;
+  };
+
+  const getPreviousSlide = () => {
+    if (previous) {
+      const slide = previous;
+      previous = current;
+      current = slide;
+      return current;
+    }
+
+    previous = current;
+    index = index > 0 ? index - 1 : deck.length - 1;
+    current = deck[index];
+    return current;
+  };
+
+  const goToHeroSlide = (direction) => {
+    if (isAnimating || slides.length < 2) {
+      return;
+    }
+
+    isAnimating = true;
+    const nextSlide = direction === "previous" ? getPreviousSlide() : getNextSlide();
+    animateHeroSlide(track, previous, nextSlide, direction, () => {
+      isAnimating = false;
+    });
+  };
+
+  carousel.addEventListener("touchstart", (event) => {
+    touchStartX = event.touches[0]?.clientX || 0;
+  }, { passive: true });
+
+  carousel.addEventListener("touchend", (event) => {
+    const touchEndX = event.changedTouches[0]?.clientX || 0;
+    const distance = touchEndX - touchStartX;
+
+    if (Math.abs(distance) < 36) {
+      return;
+    }
+
+    goToHeroSlide(distance > 0 ? "previous" : "next");
+    restartTimer();
+  }, { passive: true });
+
+  carousel.addEventListener("pointerdown", (event) => {
+    pointerStartX = event.clientX;
+  });
+
+  carousel.addEventListener("pointerup", (event) => {
+    const distance = event.clientX - pointerStartX;
+
+    if (Math.abs(distance) < 48) {
+      return;
+    }
+
+    goToHeroSlide(distance > 0 ? "previous" : "next");
+    restartTimer();
+  });
+
+  restartTimer();
+}
+
+function renderSingleHeroSlide(track, slide) {
+  track.style.transition = "none";
+  track.style.transform = "translateX(0)";
+  track.innerHTML = renderHeroSlideImage(slide);
+  track.offsetHeight;
+  track.style.transition = "";
+}
+
+function animateHeroSlide(track, fromSlide, toSlide, direction, onComplete) {
+  const nextFirst = direction === "previous";
+  const startTransform = nextFirst ? "translateX(-100%)" : "translateX(0)";
+  const endTransform = nextFirst ? "translateX(0)" : "translateX(-100%)";
+  const slidesHtml = nextFirst
+    ? `${renderHeroSlideImage(toSlide)}${renderHeroSlideImage(fromSlide)}`
+    : `${renderHeroSlideImage(fromSlide)}${renderHeroSlideImage(toSlide)}`;
+
+  track.style.transition = "none";
+  track.innerHTML = slidesHtml;
+  track.style.transform = startTransform;
+  track.offsetHeight;
+  track.style.transition = "transform 620ms ease";
+  track.style.transform = endTransform;
+
+  track.addEventListener("transitionend", () => {
+    renderSingleHeroSlide(track, toSlide);
+    onComplete();
+  }, { once: true });
+}
+
+function renderHeroSlideImage(slide) {
+  return `<img class="hero-image" src="${escapeAttribute(slide.src)}" alt="${escapeAttribute(slide.title)}" loading="eager">`;
+}
+
+function shuffleSlides(slides, avoidFirstId = null) {
+  const shuffled = [...slides];
+
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  if (avoidFirstId && shuffled.length > 1 && shuffled[0].id === avoidFirstId) {
+    const swapIndex = shuffled.findIndex((slide) => slide.id !== avoidFirstId);
+    [shuffled[0], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[0]];
+  }
+
+  return shuffled;
+}
 
 async function initListPage() {
   const list = document.querySelector("#outfit-list");
