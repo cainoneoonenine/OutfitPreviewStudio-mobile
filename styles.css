@@ -139,7 +139,7 @@ body[data-page="detail"] .page-shell {
   color: #2c352f;
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 0.76rem;
-  font-weight: 560;
+  font-weight: 460;
   letter-spacing: 0.16em;
   text-indent: 0.16em;
   box-shadow: inset 0 1px 0 rgba(255, 255, 252, 0.72);
@@ -544,6 +544,7 @@ body[data-page="detail"] .page-shell {
   font-size: 2.44rem;
   font-weight: 880;
   line-height: 1.05;
+  transform: translateX(-2px);
 }
 
 .list-subtitle {
@@ -635,6 +636,13 @@ body[data-page="detail"] .page-shell {
 .lookbook-section,
 .saved-section {
   padding: 18px 0 6px;
+}
+
+body[data-page="list"] .lookbook-section > .list-heading,
+body[data-page="list"] .lookbook-section > .filter-strip,
+body[data-page="list"] .lookbook-section > .status-message {
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .filter-strip {
