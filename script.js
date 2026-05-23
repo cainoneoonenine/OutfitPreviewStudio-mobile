@@ -545,7 +545,7 @@ function renderOutfitCard(outfit, mode) {
         </div>
         <h2 class="card-title">${escapeHtml(outfit.title)}</h2>
         ${renderTags(outfit.tags)}
-        <p class="card-description">${escapeHtml(outfit.description || "")}</p>
+        <a class="card-description card-description-link" href="${detailHref}" data-return-look-id="${escapeAttribute(outfit.id)}">${escapeHtml(outfit.description || "")}</a>
         ${secondaryAction ? `<div class="card-actions">${secondaryAction}</div>` : ""}
       </div>
     </article>

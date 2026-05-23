@@ -1360,7 +1360,11 @@
         "season": "春季",
         "style": "甜美法式、轻约会",
         "tags": [
-            "清甜、明媚、轻盈、精致、浪漫"
+            "清甜",
+            "明媚",
+            "轻盈",
+            "精致",
+            "浪漫"
         ],
         "thumb": "images/look-021/thumbs/model.webp",
         "large": "images/look-021/large/model.webp",
@@ -1421,7 +1425,10 @@
         "season": "春季",
         "style": "简约轻熟、知性通勤",
         "tags": [
-            "知性、清爽、利落、温雅"
+            "知性",
+            "清爽",
+            "利落",
+            "温雅"
         ],
         "thumb": "images/look-022/thumbs/model.webp",
         "large": "images/look-022/large/model.webp",
@@ -1473,7 +1480,10 @@
         "season": "春季",
         "style": "浪漫法式、甜美",
         "tags": [
-            "浪漫、轻盈、花影、温柔"
+            "浪漫",
+            "轻盈",
+            "花影",
+            "温柔"
         ],
         "thumb": "images/look-023/thumbs/model.webp",
         "large": "images/look-023/large/model.webp",
@@ -1525,7 +1535,10 @@
         "season": "夏季",
         "style": "清爽通勤、轻熟",
         "tags": [
-            "知性、清爽、利落、松弛"
+            "知性",
+            "清爽",
+            "利落",
+            "松弛"
         ],
         "thumb": "images/look-024/thumbs/model.webp",
         "large": "images/look-024/large/model.webp",
@@ -1577,7 +1590,10 @@
         "season": "秋季",
         "style": "复古学院、英伦",
         "tags": [
-            "学院、复古、知性、沉静"
+            "学院",
+            "复古",
+            "知性",
+            "沉静"
         ],
         "thumb": "images/look-025/thumbs/model.webp",
         "large": "images/look-025/large/model.webp",
@@ -1665,7 +1681,10 @@
         "season": "秋季",
         "style": "软糯学院、复古",
         "tags": [
-            "学院、暖意、复古、乖巧"
+            "学院",
+            "暖意",
+            "复古",
+            "乖巧"
         ],
         "thumb": "images/look-026/thumbs/model.webp",
         "large": "images/look-026/large/model.webp",
@@ -1753,7 +1772,10 @@
         "season": "夏季",
         "style": "轻熟甜酷、约会",
         "tags": [
-            "轻熟、甜酷、利落、精致"
+            "轻熟",
+            "甜酷",
+            "利落",
+            "精致"
         ],
         "thumb": "images/look-027/thumbs/model.webp",
         "large": "images/look-027/large/model.webp",
@@ -1814,7 +1836,10 @@
         "season": "夏季",
         "style": "轻熟优雅、法式",
         "tags": [
-            "优雅、轻熟、柔媚、精致"
+            "优雅",
+            "轻熟",
+            "柔媚",
+            "精致"
         ],
         "thumb": "images/look-028/thumbs/model.webp",
         "large": "images/look-028/large/model.webp",
@@ -1866,7 +1891,10 @@
         "season": "秋季",
         "style": "复古学院、甜美",
         "tags": [
-            "学院、复古、温软、清甜"
+            "学院",
+            "复古",
+            "温软",
+            "清甜"
         ],
         "thumb": "images/look-029/thumbs/model.webp",
         "large": "images/look-029/large/model.webp",
@@ -1945,7 +1973,10 @@
         "season": "秋季",
         "style": "洛丽塔、复古甜美",
         "tags": [
-            "甜美、复古、精致、童话"
+            "甜美",
+            "复古",
+            "精致",
+            "童话"
         ],
         "thumb": "images/look-030/thumbs/model.webp",
         "large": "images/look-030/large/model.webp",
@@ -2006,7 +2037,10 @@
         "season": "夏季",
         "style": "清新甜美、度假",
         "tags": [
-            "清爽、轻盈、明媚、温柔"
+            "清爽",
+            "轻盈",
+            "明媚",
+            "温柔"
         ],
         "thumb": "images/look-031/thumbs/model.webp",
         "large": "images/look-031/large/model.webp",
@@ -2058,7 +2092,10 @@
         "season": "夏季",
         "style": "清爽度假、轻甜",
         "tags": [
-            "度假、清透、轻盈、灵动"
+            "度假",
+            "清透",
+            "轻盈",
+            "灵动"
         ],
         "thumb": "images/look-032/thumbs/model.webp",
         "large": "images/look-032/large/model.webp",
@@ -2110,7 +2147,10 @@
         "season": "春季",
         "style": "洛丽塔、甜美复古",
         "tags": [
-            "甜美、精致、梦幻、复古"
+            "甜美",
+            "精致",
+            "梦幻",
+            "复古"
         ],
         "thumb": "images/look-033/thumbs/model.webp",
         "large": "images/look-033/large/model.webp",
@@ -2171,7 +2211,10 @@
         "season": "夏季",
         "style": "清甜度假、海边甜美",
         "tags": [
-            "海边、清爽、灵动、甜美"
+            "海边",
+            "清爽",
+            "灵动",
+            "甜美"
         ],
         "thumb": "images/look-034/thumbs/model.webp",
         "large": "images/look-034/large/model.webp",
@@ -2214,7 +2257,10 @@
         "season": "春季",
         "style": "浪漫派对、轻礼服",
         "tags": [
-            "浪漫、华丽、轻盈、精致"
+            "浪漫",
+            "华丽",
+            "轻盈",
+            "精致"
         ],
         "thumb": "images/look-035/thumbs/model.webp",
         "large": "images/look-035/large/model.webp",
@@ -2248,7 +2294,10 @@
         "season": "春季",
         "style": "清新浪漫、甜美",
         "tags": [
-            "清新、温柔、精致、花影"
+            "清新",
+            "温柔",
+            "精致",
+            "花影"
         ],
         "thumb": "images/look-036/thumbs/model.webp",
         "large": "images/look-036/large/model.webp",
@@ -2300,7 +2349,10 @@
         "season": "夏季",
         "style": "清甜法式、花园甜美",
         "tags": [
-            "清甜、轻盈、浪漫、明媚"
+            "清甜",
+            "轻盈",
+            "浪漫",
+            "明媚"
         ],
         "thumb": "images/look-037/thumbs/model.webp",
         "large": "images/look-037/large/model.webp",
@@ -2352,7 +2404,10 @@
         "season": "春季",
         "style": "甜美法式、约会",
         "tags": [
-            "甜美、浪漫、清新、花影"
+            "甜美",
+            "浪漫",
+            "清新",
+            "花影"
         ],
         "thumb": "images/look-038/thumbs/model.webp",
         "large": "images/look-038/large/model.webp",
@@ -2404,7 +2459,10 @@
         "season": "春季",
         "style": "浪漫甜美、轻礼服",
         "tags": [
-            "浪漫、甜美、轻盈、派对"
+            "浪漫",
+            "甜美",
+            "轻盈",
+            "派对"
         ],
         "thumb": "images/look-039/thumbs/model.webp",
         "large": "images/look-039/large/model.webp",
@@ -2438,7 +2496,10 @@
         "season": "秋季",
         "style": "都市轻熟、优雅",
         "tags": [
-            "轻熟、利落、摩登、精致"
+            "轻熟",
+            "利落",
+            "摩登",
+            "精致"
         ],
         "thumb": "images/look-040/thumbs/model.webp",
         "large": "images/look-040/large/model.webp",
@@ -2491,5 +2552,600 @@
             }
         ],
         "scene": "晚餐约会、城市通勤、朋友小聚"
+    },
+    {
+        "id": "look-041",
+        "order": 410,
+        "title": "海露纱影",
+        "season": "夏季",
+        "style": "度假甜美",
+        "tags": [
+            "清透",
+            "灵动",
+            "浪漫",
+            "度假"
+        ],
+        "thumb": "images/look-041/thumbs/model.webp",
+        "large": "images/look-041/large/model.webp",
+        "description": "蕾丝吊带上衣搭配层叠纱质短裙，以银色蝴蝶高跟凉鞋和粉色链条小包点出精致感。整体轻盈明亮，适合海边度假、露台下午茶或夏日约会。",
+        "items": [
+            {
+                "order": 20,
+                "name": "蕾丝吊带",
+                "nameEn": "lace-camisole",
+                "shape": "top",
+                "note": "适合夏日度假和约会搭配，蕾丝纹理让肩颈线条更轻盈精致。",
+                "thumb": "images/look-041/thumbs/item-white-lace-camisole.webp",
+                "large": "images/look-041/large/item-white-lace-camisole.webp"
+            },
+            {
+                "order": 30,
+                "name": "层叠纱裙",
+                "nameEn": "tiered-tulle-mini-skirt",
+                "shape": "skirt",
+                "note": "适合海边和露台场景，层叠裙摆带来轻盈动感，显得明亮甜美。",
+                "thumb": "images/look-041/thumbs/item-white-tiered-tulle-mini-skirt.webp",
+                "large": "images/look-041/large/item-white-tiered-tulle-mini-skirt.webp"
+            },
+            {
+                "order": 50,
+                "name": "蝴蝶高跟凉鞋",
+                "nameEn": "butterfly-high-heel-sandals",
+                "shape": "shoes",
+                "note": "适合度假约会和拍照，蝴蝶装饰提升梦幻感，踝带也让步态更稳。",
+                "thumb": "images/look-041/thumbs/item-silver-butterfly-high-heel-sandals.webp",
+                "large": "images/look-041/large/item-silver-butterfly-high-heel-sandals.webp"
+            },
+            {
+                "order": 70,
+                "name": "蝴蝶结链条包",
+                "nameEn": "bow-chain-shoulder-bag",
+                "shape": "bag",
+                "note": "适合轻礼服和度假穿搭，链条与蝴蝶结让浅色造型更有细节。",
+                "thumb": "images/look-041/thumbs/item-pink-bow-chain-shoulder-bag.webp",
+                "large": "images/look-041/large/item-pink-bow-chain-shoulder-bag.webp"
+            }
+        ],
+        "scene": "海边度假、露台下午茶、夏日约会"
+    },
+    {
+        "id": "look-042",
+        "order": 420,
+        "title": "咖影缎光",
+        "season": "秋季",
+        "style": "都市轻熟",
+        "tags": [
+            "轻熟",
+            "通勤",
+            "精致",
+            "约会"
+        ],
+        "thumb": "images/look-042/thumbs/model.webp",
+        "large": "images/look-042/large/model.webp",
+        "description": "缎面纽扣衬衫搭配直筒短裙，以黑色连裤丝袜、尖头高跟鞋和肩背小包收束线条。整体柔和克制又带都市光泽，适合咖啡会面、轻通勤或晚间小聚。",
+        "items": [
+            {
+                "order": 20,
+                "name": "缎面衬衫",
+                "nameEn": "satin-button-up-shirt",
+                "shape": "shirt",
+                "note": "适合通勤和约会内搭，柔亮质感能弱化正式感，让短裙造型更温柔。",
+                "thumb": "images/look-042/thumbs/item-beige-satin-button-up-shirt.webp",
+                "large": "images/look-042/large/item-beige-satin-button-up-shirt.webp"
+            },
+            {
+                "order": 30,
+                "name": "直筒短裙",
+                "nameEn": "straight-mini-skirt",
+                "shape": "skirt",
+                "note": "适合轻熟通勤和城市约会，直筒版型干净利落，能拉出修长比例。",
+                "thumb": "images/look-042/thumbs/item-charcoal-straight-mini-skirt.webp",
+                "large": "images/look-042/large/item-charcoal-straight-mini-skirt.webp"
+            },
+            {
+                "order": 40,
+                "name": "黑色连裤丝袜",
+                "nameEn": "black-sheer-tights",
+                "shape": "socks",
+                "note": "适合短裙与高跟鞋搭配，丝袜质感修饰腿部线条，增加轻熟气息。",
+                "thumb": "images/look-042/thumbs/item-black-sheer-tights.webp",
+                "large": "images/look-042/large/item-black-sheer-tights.webp"
+            },
+            {
+                "order": 50,
+                "name": "尖头高跟鞋",
+                "nameEn": "pointed-toe-heels",
+                "shape": "shoes",
+                "note": "适合晚餐和通勤场景，尖头线条利落，能让整体更显修长摩登。",
+                "thumb": "images/look-042/thumbs/item-black-pointed-toe-heels.webp",
+                "large": "images/look-042/large/item-black-pointed-toe-heels.webp"
+            },
+            {
+                "order": 70,
+                "name": "肩背小包",
+                "nameEn": "shoulder-bag",
+                "shape": "bag",
+                "note": "适合城市出行和约会，小巧包型保持轻便，也补足精致收尾。",
+                "thumb": "images/look-042/thumbs/item-black-shoulder-bag.webp",
+                "large": "images/look-042/large/item-black-shoulder-bag.webp"
+            }
+        ],
+        "scene": "咖啡会面、轻通勤、晚间小聚"
+    },
+    {
+        "id": "look-043",
+        "order": 430,
+        "title": "浅檐柔光",
+        "season": "春季",
+        "style": "温柔通勤",
+        "tags": [
+            "柔雅",
+            "清新",
+            "轻熟",
+            "简约"
+        ],
+        "thumb": "images/look-043/thumbs/model.webp",
+        "large": "images/look-043/large/model.webp",
+        "description": "垂褶针织上衣搭配浅色短裙，以同色肩背包和厚底高跟凉鞋延续柔和色调。整体干净明亮，带有温柔的通勤气质，适合设计工作室、午后会面或城市散步。",
+        "items": [
+            {
+                "order": 20,
+                "name": "垂褶针织上衣",
+                "nameEn": "draped-ribbed-knit-top",
+                "shape": "top",
+                "note": "适合春日通勤和约会，垂褶领口柔化肩颈线条，增添温柔气质。",
+                "thumb": "images/look-043/thumbs/item-draped-ribbed-knit-top.webp",
+                "large": "images/look-043/large/item-draped-ribbed-knit-top.webp"
+            },
+            {
+                "order": 30,
+                "name": "A字短裙",
+                "nameEn": "a-line-mini-skirt",
+                "shape": "skirt",
+                "note": "适合搭配针织衫或衬衫，A字轮廓清爽显腿长，让造型更轻盈。",
+                "thumb": "images/look-043/thumbs/item-beige-a-line-mini-skirt.webp",
+                "large": "images/look-043/large/item-beige-a-line-mini-skirt.webp"
+            },
+            {
+                "order": 50,
+                "name": "厚底高跟凉鞋",
+                "nameEn": "platform-high-heel-sandals",
+                "shape": "shoes",
+                "note": "适合约会和轻正式场合，厚底设计增加高度，也让浅色穿搭更有精致感。",
+                "thumb": "images/look-043/thumbs/item-beige-platform-high-heel-sandals.webp",
+                "large": "images/look-043/large/item-beige-platform-high-heel-sandals.webp"
+            },
+            {
+                "order": 70,
+                "name": "浅色肩背包",
+                "nameEn": "shoulder-bag",
+                "shape": "bag",
+                "note": "适合日常通勤和短途出行，柔和包型能平衡短裙造型的轻盈感。",
+                "thumb": "images/look-043/thumbs/item-beige-shoulder-bag.webp",
+                "large": "images/look-043/large/item-beige-shoulder-bag.webp"
+            }
+        ],
+        "scene": "设计工作室、午后会面、城市散步"
+    },
+    {
+        "id": "look-044",
+        "order": 440,
+        "title": "檐边晴影",
+        "season": "夏季",
+        "style": "清甜法式",
+        "tags": [
+            "清雅",
+            "轻盈",
+            "柔甜",
+            "精巧"
+        ],
+        "thumb": "images/look-044/thumbs/model.webp",
+        "large": "images/look-044/large/model.webp",
+        "description": "方领系带罗纹上衣搭配不对称裹身短裙，花饰高跟凉鞋与弯月肩背包延续轻盈线条。整体明亮柔和，带着夏日约会的清甜气息，适合下午茶、小型聚会或街区漫步。",
+        "items": [
+            {
+                "order": 20,
+                "name": "方领系带上衣",
+                "nameEn": "square-neck-tie-front-top",
+                "shape": "top",
+                "note": "适合搭配高腰短裙，方领和系带能衬出温柔清甜的肩颈线条。",
+                "thumb": "images/look-044/thumbs/item-ivory-tie-front-ribbed-top.webp",
+                "large": "images/look-044/large/item-ivory-tie-front-ribbed-top.webp"
+            },
+            {
+                "order": 30,
+                "name": "裹身短裙",
+                "nameEn": "wrap-mini-skirt",
+                "shape": "skirt",
+                "note": "适合约会和轻松出行，不对称裙摆让浅色搭配更有层次。",
+                "thumb": "images/look-044/thumbs/item-ivory-wrap-mini-skirt.webp",
+                "large": "images/look-044/large/item-ivory-wrap-mini-skirt.webp"
+            },
+            {
+                "order": 50,
+                "name": "花饰高跟凉鞋",
+                "nameEn": "floral-high-heel-sandals",
+                "shape": "shoes",
+                "note": "适合夏日约会和小聚，立体花饰能增加精致甜美感。",
+                "thumb": "images/look-044/thumbs/item-ivory-floral-high-heel-sandals.webp",
+                "large": "images/look-044/large/item-ivory-floral-high-heel-sandals.webp"
+            },
+            {
+                "order": 70,
+                "name": "弯月肩背包",
+                "nameEn": "crescent-shoulder-bag",
+                "shape": "bag",
+                "note": "适合轻装出行，柔和包型能让短裙造型更显优雅。",
+                "thumb": "images/look-044/thumbs/item-cream-shoulder-bag.webp",
+                "large": "images/look-044/large/item-cream-shoulder-bag.webp"
+            }
+        ],
+        "scene": "下午茶、小型聚会、街区漫步"
+    },
+    {
+        "id": "look-045",
+        "order": 450,
+        "title": "茶露轻纱",
+        "season": "夏季",
+        "style": "轻甜度假",
+        "tags": [
+            "柔雅",
+            "轻盈",
+            "浪漫",
+            "精致"
+        ],
+        "thumb": "images/look-045/thumbs/model.webp",
+        "large": "images/look-045/large/model.webp",
+        "description": "系带针织短袖上衣搭配蝴蝶结裹身短裙，细带水钻高跟凉鞋拉开轻盈比例，结构肩背包增加整洁收尾。整套甜而不腻，适合露台下午茶、夏日约会或短途度假。",
+        "items": [
+            {
+                "order": 20,
+                "name": "系带针织上衣",
+                "nameEn": "tie-front-knit-top",
+                "shape": "top",
+                "note": "适合搭配柔软短裙，胸前系带能增加温柔细节和亲和感。",
+                "thumb": "images/look-045/thumbs/item-ivory-tie-front-knit-top.webp",
+                "large": "images/look-045/large/item-ivory-tie-front-knit-top.webp"
+            },
+            {
+                "order": 30,
+                "name": "蝴蝶结裹裙",
+                "nameEn": "bow-wrap-mini-skirt",
+                "shape": "skirt",
+                "note": "适合度假和约会穿搭，侧边蝴蝶结让裙摆更轻盈灵动。",
+                "thumb": "images/look-045/thumbs/item-beige-bow-wrap-mini-skirt.webp",
+                "large": "images/look-045/large/item-beige-bow-wrap-mini-skirt.webp"
+            },
+            {
+                "order": 50,
+                "name": "水钻高跟凉鞋",
+                "nameEn": "rhinestone-high-heel-sandals",
+                "shape": "shoes",
+                "note": "适合晚餐约会和夏日聚会，细带水钻能提升精致亮点。",
+                "thumb": "images/look-045/thumbs/item-nude-rhinestone-strap-high-heel-sandals.webp",
+                "large": "images/look-045/large/item-nude-rhinestone-strap-high-heel-sandals.webp"
+            },
+            {
+                "order": 70,
+                "name": "翻盖肩背包",
+                "nameEn": "flap-shoulder-bag",
+                "shape": "bag",
+                "note": "适合城市出行和轻熟约会，挺括轮廓能平衡柔软裙摆。",
+                "thumb": "images/look-045/thumbs/item-beige-structured-shoulder-bag.webp",
+                "large": "images/look-045/large/item-beige-structured-shoulder-bag.webp"
+            }
+        ],
+        "scene": "露台下午茶、夏日约会、短途度假"
+    },
+    {
+        "id": "look-046",
+        "order": 460,
+        "title": "书窗樱光",
+        "season": "春季",
+        "style": "知性甜美",
+        "tags": [
+            "清新",
+            "知性",
+            "柔和",
+            "轻熟"
+        ],
+        "thumb": "images/look-046/thumbs/model.webp",
+        "large": "images/look-046/large/model.webp",
+        "description": "短款针织开衫叠穿罗纹背心，搭配粉色开衩迷你裙，水钻高跟凉鞋与结构手提包带出明亮精致感。整体温柔干净，适合春日会面、书店小逛或咖啡小聚。",
+        "items": [
+            {
+                "order": 10,
+                "name": "短款针织开衫",
+                "nameEn": "cropped-knit-cardigan",
+                "shape": "top",
+                "note": "适合春季叠穿，短款比例能让整体更轻盈，也增添温柔气质。",
+                "thumb": "images/look-046/thumbs/item-ivory-knit-cardigan.webp",
+                "large": "images/look-046/large/item-ivory-knit-cardigan.webp"
+            },
+            {
+                "order": 20,
+                "name": "罗纹背心",
+                "nameEn": "ribbed-tank-top",
+                "shape": "top",
+                "note": "适合做开衫内搭，贴身罗纹能保持清爽线条和干净层次。",
+                "thumb": "images/look-046/thumbs/item-ivory-ribbed-tank-top.webp",
+                "large": "images/look-046/large/item-ivory-ribbed-tank-top.webp"
+            },
+            {
+                "order": 30,
+                "name": "开衩迷你裙",
+                "nameEn": "slit-mini-skirt",
+                "shape": "skirt",
+                "note": "适合搭配针织上衣，侧开衩让粉色短裙更显轻熟灵动。",
+                "thumb": "images/look-046/thumbs/item-pink-slit-mini-skirt.webp",
+                "large": "images/look-046/large/item-pink-slit-mini-skirt.webp"
+            },
+            {
+                "order": 50,
+                "name": "水钻高跟凉鞋",
+                "nameEn": "rhinestone-high-heel-sandals",
+                "shape": "shoes",
+                "note": "适合约会和小型聚会，水钻装饰能增加明亮精致感。",
+                "thumb": "images/look-046/thumbs/item-clear-rhinestone-high-heel-sandals.webp",
+                "large": "images/look-046/large/item-clear-rhinestone-high-heel-sandals.webp"
+            },
+            {
+                "order": 70,
+                "name": "结构手提包",
+                "nameEn": "structured-handbag",
+                "shape": "bag",
+                "note": "适合咖啡馆会面和日常出行，硬挺包型能提升知性气质。",
+                "thumb": "images/look-046/thumbs/item-ivory-structured-handbag.webp",
+                "large": "images/look-046/large/item-ivory-structured-handbag.webp"
+            }
+        ],
+        "scene": "春日会面、书店小逛、咖啡小聚"
+    },
+    {
+        "id": "look-047",
+        "order": 470,
+        "title": "檐光柔序",
+        "season": "春季",
+        "style": "轻熟通勤",
+        "tags": [
+            "柔雅",
+            "利落",
+            "知性",
+            "清新"
+        ],
+        "thumb": "images/look-047/thumbs/model.webp",
+        "large": "images/look-047/large/model.webp",
+        "description": "短款西装外套叠穿吊坠背心，搭配浅色迷你裙与蝴蝶结扣腰带，水钻坡跟凉鞋和结构手提包让整体更显精致。造型干净柔和，适合春日会面、轻通勤或下午茶小聚。",
+        "items": [
+            {
+                "name": "短款西装外套",
+                "nameEn": "cropped-blazer",
+                "shape": "coat",
+                "note": "适合春季通勤和约会叠穿，短款剪裁能提升腰线并保持利落。",
+                "thumb": "images/look-047/thumbs/item-ivory-cropped-blazer.webp",
+                "large": "images/look-047/large/item-ivory-cropped-blazer.webp",
+                "order": 10
+            },
+            {
+                "name": "吊坠背心",
+                "nameEn": "charm-tank-top",
+                "shape": "top",
+                "note": "适合做西装内搭，胸前吊坠细节能增加柔和精致感。",
+                "thumb": "images/look-047/thumbs/item-ivory-charm-tank-top.webp",
+                "large": "images/look-047/large/item-ivory-charm-tank-top.webp",
+                "order": 20
+            },
+            {
+                "name": "直筒迷你裙",
+                "nameEn": "straight-mini-skirt",
+                "shape": "skirt",
+                "note": "适合搭配短外套和腰带，简洁裙型让整体更显轻盈。",
+                "thumb": "images/look-047/thumbs/item-beige-mini-skirt.webp",
+                "large": "images/look-047/large/item-beige-mini-skirt.webp",
+                "order": 30
+            },
+            {
+                "name": "水钻坡跟凉鞋",
+                "nameEn": "rhinestone-wedge-sandals",
+                "shape": "shoes",
+                "note": "适合约会和短途出行，坡跟稳定舒适，水钻细节更显精致。",
+                "thumb": "images/look-047/thumbs/item-nude-rhinestone-wedge-sandals.webp",
+                "large": "images/look-047/large/item-nude-rhinestone-wedge-sandals.webp",
+                "order": 50
+            },
+            {
+                "name": "结构手提包",
+                "nameEn": "structured-handbag",
+                "shape": "bag",
+                "note": "适合通勤和会面场景，挺括轮廓能提升知性气质。",
+                "thumb": "images/look-047/thumbs/item-beige-structured-handbag.webp",
+                "large": "images/look-047/large/item-beige-structured-handbag.webp",
+                "order": 70
+            },
+            {
+                "name": "蝴蝶结腰带",
+                "nameEn": "bow-buckle-belt",
+                "shape": "accessory",
+                "note": "适合搭配短裙或西装造型，精巧扣饰能强调腰线。",
+                "thumb": "images/look-047/thumbs/item-beige-bow-buckle-belt.webp",
+                "large": "images/look-047/large/item-beige-bow-buckle-belt.webp",
+                "order": 80
+            }
+        ],
+        "scene": "春日会面、轻通勤、下午茶小聚"
+    },
+    {
+        "id": "look-048",
+        "order": 480,
+        "title": "墨影书窗",
+        "season": "秋季",
+        "style": "都市轻熟",
+        "tags": [
+            "知性",
+            "利落",
+            "摩登",
+            "克制"
+        ],
+        "thumb": "images/look-048/thumbs/model.webp",
+        "large": "images/look-048/large/model.webp",
+        "description": "纽扣罗纹上衣搭配开衩迷你裙，以黑色连裤丝袜、尖头高跟鞋和结构手提包拉出修长线条。整体简洁克制，适合咖啡会面、轻通勤或晚间小聚。",
+        "items": [
+            {
+                "name": "纽扣罗纹上衣",
+                "nameEn": "button-ribbed-top",
+                "shape": "top",
+                "note": "适合秋季单穿或内搭，细密罗纹让上身线条更干净。",
+                "thumb": "images/look-048/thumbs/item-ivory-button-ribbed-top.webp",
+                "large": "images/look-048/large/item-ivory-button-ribbed-top.webp",
+                "order": 20
+            },
+            {
+                "name": "开衩迷你裙",
+                "nameEn": "slit-mini-skirt",
+                "shape": "skirt",
+                "note": "适合轻熟通勤和约会，侧开衩让深色短裙更显轻盈。",
+                "thumb": "images/look-048/thumbs/item-charcoal-slit-mini-skirt.webp",
+                "large": "images/look-048/large/item-charcoal-slit-mini-skirt.webp",
+                "order": 30
+            },
+            {
+                "name": "黑色连裤丝袜",
+                "nameEn": "black-sheer-tights",
+                "shape": "socks",
+                "note": "适合搭配短裙和高跟鞋，丝袜质感能修饰腿部线条。",
+                "thumb": "images/look-048/thumbs/item-black-sheer-tights.webp",
+                "large": "images/look-048/large/item-black-sheer-tights.webp",
+                "order": 40
+            },
+            {
+                "name": "尖头高跟鞋",
+                "nameEn": "pointed-toe-heels",
+                "shape": "shoes",
+                "note": "适合通勤和晚间场景，尖头线条能让整体更显修长。",
+                "thumb": "images/look-048/thumbs/item-black-pointed-toe-heels.webp",
+                "large": "images/look-048/large/item-black-pointed-toe-heels.webp",
+                "order": 50
+            },
+            {
+                "name": "结构手提包",
+                "nameEn": "structured-handbag",
+                "shape": "bag",
+                "note": "适合都市出行和工作会面，硬挺包型能增加秩序感。",
+                "thumb": "images/look-048/thumbs/item-black-structured-handbag.webp",
+                "large": "images/look-048/large/item-black-structured-handbag.webp",
+                "order": 70
+            }
+        ],
+        "scene": "咖啡会面、轻通勤、晚间小聚"
+    },
+    {
+        "id": "look-049",
+        "order": 490,
+        "title": "银絮晴音",
+        "season": "春季",
+        "style": "浪漫学院",
+        "tags": [
+            "清甜",
+            "灵动",
+            "优雅",
+            "明净"
+        ],
+        "thumb": "images/look-049/thumbs/model.webp",
+        "large": "images/look-049/large/model.webp",
+        "description": "系带雪纺衬衫搭配百褶迷你裙，链条肩背包和银色蝴蝶结高跟鞋带出明亮精致感。整套轻盈柔雅，适合春日约会、展览小逛或下午茶拍照。",
+        "items": [
+            {
+                "name": "系带雪纺衬衫",
+                "nameEn": "tie-neck-chiffon-blouse",
+                "shape": "shirt",
+                "note": "适合春季约会和拍照，飘带领口能增加柔美层次。",
+                "thumb": "images/look-049/thumbs/item-white-tie-neck-chiffon-blouse.webp",
+                "large": "images/look-049/large/item-white-tie-neck-chiffon-blouse.webp",
+                "order": 20
+            },
+            {
+                "name": "百褶迷你裙",
+                "nameEn": "pleated-mini-skirt",
+                "shape": "skirt",
+                "note": "适合学院感和甜美造型，百褶裙摆让步伐更轻盈。",
+                "thumb": "images/look-049/thumbs/item-light-gray-pleated-mini-skirt.webp",
+                "large": "images/look-049/large/item-light-gray-pleated-mini-skirt.webp",
+                "order": 30
+            },
+            {
+                "name": "蝴蝶结高跟鞋",
+                "nameEn": "bow-ankle-strap-heels",
+                "shape": "shoes",
+                "note": "适合约会和轻礼服穿搭，亮面蝴蝶结能增加精致焦点。",
+                "thumb": "images/look-049/thumbs/item-silver-bow-ankle-strap-heels.webp",
+                "large": "images/look-049/large/item-silver-bow-ankle-strap-heels.webp",
+                "order": 50
+            },
+            {
+                "name": "链条肩背包",
+                "nameEn": "chain-shoulder-bag",
+                "shape": "bag",
+                "note": "适合下午茶和展览小逛，链条细节能补足优雅光泽。",
+                "thumb": "images/look-049/thumbs/item-ivory-chain-shoulder-bag.webp",
+                "large": "images/look-049/large/item-ivory-chain-shoulder-bag.webp",
+                "order": 70
+            }
+        ],
+        "scene": "春日约会、展览小逛、下午茶拍照"
+    },
+    {
+        "id": "look-050",
+        "order": 500,
+        "title": "海风纱影",
+        "season": "夏季",
+        "style": "度假甜美",
+        "tags": [
+            "轻盈",
+            "浪漫",
+            "明亮",
+            "清甜"
+        ],
+        "thumb": "images/look-050/thumbs/model.webp",
+        "large": "images/look-050/large/model.webp",
+        "description": "抽褶吊带上衣搭配层叠纱裙，银色肩背包和蝴蝶结高跟鞋增添清亮光泽。整套轻盈甜美，适合海边餐厅、夏日约会或度假拍照。",
+        "items": [
+            {
+                "name": "抽褶吊带",
+                "nameEn": "ruched-camisole",
+                "shape": "top",
+                "note": "适合夏日度假和约会，抽褶细节能柔化肩颈线条。",
+                "thumb": "images/look-050/thumbs/item-white-ruched-camisole.webp",
+                "large": "images/look-050/large/item-white-ruched-camisole.webp",
+                "order": 20
+            },
+            {
+                "name": "层叠纱裙",
+                "nameEn": "tiered-tulle-mini-skirt",
+                "shape": "skirt",
+                "note": "适合海边和派对场景，层叠裙摆能增加轻盈甜美感。",
+                "thumb": "images/look-050/thumbs/item-white-tiered-tulle-mini-skirt.webp",
+                "large": "images/look-050/large/item-white-tiered-tulle-mini-skirt.webp",
+                "order": 30
+            },
+            {
+                "name": "蝴蝶结高跟鞋",
+                "nameEn": "bow-ankle-strap-heels",
+                "shape": "shoes",
+                "note": "适合度假约会和拍照，纱质蝴蝶结让造型更浪漫。",
+                "thumb": "images/look-050/thumbs/item-silver-bow-ankle-strap-heels.webp",
+                "large": "images/look-050/large/item-silver-bow-ankle-strap-heels.webp",
+                "order": 50
+            },
+            {
+                "name": "银色肩背包",
+                "nameEn": "silver-shoulder-bag",
+                "shape": "bag",
+                "note": "适合夏日晚间出行，金属光泽能提升清爽精致感。",
+                "thumb": "images/look-050/thumbs/item-silver-shoulder-bag.webp",
+                "large": "images/look-050/large/item-silver-shoulder-bag.webp",
+                "order": 70
+            }
+        ],
+        "scene": "海边餐厅、夏日约会、度假拍照"
     }
 ]

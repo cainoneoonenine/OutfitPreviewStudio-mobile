@@ -918,6 +918,10 @@ body[data-page="list"] .lookbook-section > .status-message {
   -webkit-line-clamp: 4;
 }
 
+.card-description-link {
+  cursor: pointer;
+}
+
 .tag-list {
   display: flex;
   flex-wrap: nowrap;
