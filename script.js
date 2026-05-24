@@ -1,5 +1,6 @@
 const DATA_URL = "data/outfits.json";
 const STORAGE_KEY = "outfit-preview-studio-saved";
+const HIDDEN_STORAGE_KEY = "outfit-preview-studio-hidden";
 const LOOK_RETURN_KEY = "outfit-preview-studio-return-look";
 const LOOK_RETURN_PARAM = "look";
 const LOOK_RETURN_URL_PARAM = "returnTo";
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const page = document.body.dataset.page;
   wireImageFallbacks(document);
   wireFavoritesOverlay();
+  wireHiddenOverlay();
 
   if (page === "list") {
     initListPage();
@@ -231,6 +233,7 @@ async function initListPage() {
         returnLookId = "";
       }
     };
+    window.__outfitListRefresh = updateList;
 
     if (search) {
       search.addEventListener("input", () => {
@@ -271,6 +274,7 @@ async function initDetailPage() {
     detail.innerHTML = renderDetail(outfit);
     wireImageFallbacks(detail);
     wireSaveButtons(detail);
+    wireHideButtons(detail);
     wireItemPreview(detail, outfit);
     wireDetailBackLink(detail);
   } catch (error) {
@@ -300,6 +304,19 @@ function wireFavoritesOverlay() {
 
     event.preventDefault();
     openFavoritesOverlay();
+  });
+}
+
+function wireHiddenOverlay() {
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("[data-action='open-hidden']");
+
+    if (!link) {
+      return;
+    }
+
+    event.preventDefault();
+    openHiddenOverlay();
   });
 }
 
@@ -343,6 +360,7 @@ function renderFilters(container, activeCategory, onSelect) {
 
 function filterOutfits(outfits, state) {
   const query = state.query.toLowerCase();
+  const hiddenIds = getHiddenLooks();
 
   return outfits.filter((outfit) => {
     const outfitSeason = normalizeSeason(outfit.season || outfit.category);
@@ -356,10 +374,11 @@ function filterOutfits(outfits, state) {
         ? outfit.items.map((item) => item.name)
         : [])
     ].filter(Boolean).join(" ").toLowerCase();
+    const isHidden = hiddenIds.includes(outfit.id);
     const matchesCategory = state.category === "全部" || outfitSeason === state.category;
     const matchesSearch = !query || searchableText.includes(query);
 
-    return matchesCategory && matchesSearch;
+    return !isHidden && matchesCategory && matchesSearch;
   });
 }
 
@@ -390,12 +409,14 @@ function renderOutfitList(container, outfits) {
   container.innerHTML = outfits.map((outfit) => renderOutfitCard(outfit, "toggle")).join("");
   wireImageFallbacks(container);
   wireSaveButtons(container);
+  wireHideButtons(container);
   wireLookReturnLinks(container);
 }
 
 function renderFavorites(container, outfits) {
   const savedIds = getSavedLooks();
-  const savedOutfits = sortOutfits(outfits.filter((outfit) => savedIds.includes(outfit.id)));
+  const hiddenIds = getHiddenLooks();
+  const savedOutfits = sortOutfits(outfits.filter((outfit) => savedIds.includes(outfit.id) && !hiddenIds.includes(outfit.id)));
 
   if (!savedOutfits.length) {
     container.innerHTML = `<div class="notice">暂无灵感</div>`;
@@ -404,6 +425,7 @@ function renderFavorites(container, outfits) {
 
   container.innerHTML = savedOutfits.map((outfit) => renderOutfitCard(outfit, "remove")).join("");
   wireImageFallbacks(container);
+  wireHideButtons(container);
   wireLookReturnLinks(container);
 
   container.querySelectorAll("[data-action='remove-save']").forEach((button) => {
@@ -415,7 +437,7 @@ function renderFavorites(container, outfits) {
 }
 
 async function openFavoritesOverlay() {
-  closeFavoritesOverlay();
+  closeAllOverlays();
 
   const modal = document.createElement("div");
   modal.className = "favorites-modal";
@@ -463,7 +485,8 @@ async function openFavoritesOverlay() {
 
 function renderFavoritesOverlayList(outfits) {
   const savedIds = getSavedLooks();
-  const savedOutfits = sortOutfits(outfits.filter((outfit) => savedIds.includes(outfit.id)));
+  const hiddenIds = getHiddenLooks();
+  const savedOutfits = sortOutfits(outfits.filter((outfit) => savedIds.includes(outfit.id) && !hiddenIds.includes(outfit.id)));
 
   if (!savedOutfits.length) {
     return `<div class="notice">暂无灵感</div>`;
@@ -502,15 +525,106 @@ function wireFavoriteOverlayRemoveButtons(container, outfits) {
   });
 }
 
+async function openHiddenOverlay() {
+  closeAllOverlays();
+
+  const modal = document.createElement("div");
+  modal.className = "favorites-modal hidden-modal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("aria-labelledby", "hidden-modal-title");
+  modal.innerHTML = `
+    <div class="favorites-panel">
+      <div class="favorites-panel-header">
+        <div>
+          <p class="favorites-panel-kicker">Hidden Inspiration</p>
+          <h2 id="hidden-modal-title">已隐藏灵感</h2>
+        </div>
+        <button class="favorites-close" type="button" aria-label="关闭隐藏浮窗"></button>
+      </div>
+      <div class="favorites-panel-body">
+        <div class="notice">正在读取隐藏列表...</div>
+      </div>
+    </div>
+  `;
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      closeHiddenOverlay();
+    }
+  });
+
+  modal.querySelector(".favorites-close").addEventListener("click", closeHiddenOverlay);
+  document.addEventListener("keydown", handleHiddenOverlayKeydown);
+  document.body.classList.add("modal-open");
+  document.body.appendChild(modal);
+
+  const body = modal.querySelector(".favorites-panel-body");
+
+  try {
+    const outfits = await fetchOutfits();
+    body.innerHTML = renderHiddenOverlayList(outfits);
+    wireImageFallbacks(body);
+    wireLookReturnLinks(body);
+    wireHiddenOverlayRestoreButtons(body, outfits);
+  } catch (error) {
+    body.innerHTML = `<div class="notice notice-error">无法读取隐藏列表。</div>`;
+  }
+}
+
+function renderHiddenOverlayList(outfits) {
+  const hiddenIds = getHiddenLooks();
+  const hiddenOutfits = sortOutfits(outfits.filter((outfit) => hiddenIds.includes(outfit.id)));
+
+  if (!hiddenOutfits.length) {
+    return `<div class="notice">暂无隐藏</div>`;
+  }
+
+  return `
+    <div class="favorite-look-list">
+      ${hiddenOutfits.map((outfit) => `
+        <div class="favorite-look-row">
+          <a class="favorite-look-link" href="outfit.html?id=${encodeURIComponent(outfit.id)}" data-return-look-id="${escapeAttribute(outfit.id)}">
+            <img src="${escapeAttribute(outfit.thumb || outfit.large)}" alt="${escapeAttribute(outfit.title)}" loading="lazy">
+            <div class="favorite-look-copy">
+              <strong>${escapeHtml(outfit.title)}</strong>
+              ${renderTags(outfit.tags)}
+            </div>
+          </a>
+          <button class="favorites-close favorite-look-remove hidden-look-restore" type="button" data-action="remove-hidden" data-id="${escapeAttribute(outfit.id)}" aria-label="取消隐藏"></button>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function wireHiddenOverlayRestoreButtons(container, outfits) {
+  container.querySelectorAll("[data-action='remove-hidden']").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      removeHiddenLook(button.dataset.id);
+      container.innerHTML = renderHiddenOverlayList(outfits);
+      wireImageFallbacks(container);
+      wireLookReturnLinks(container);
+      wireHiddenOverlayRestoreButtons(container, outfits);
+      updateHideButtons(button.dataset.id);
+      refreshListPage();
+    });
+  });
+}
+
 function closeFavoritesOverlay() {
   const existingModal = document.querySelector(".favorites-modal");
 
-  if (existingModal) {
+  if (existingModal && !existingModal.classList.contains("hidden-modal")) {
     existingModal.remove();
   }
 
-  document.body.classList.remove("modal-open");
   document.removeEventListener("keydown", handleFavoritesOverlayKeydown);
+  if (!document.querySelector(".favorites-modal")) {
+    document.body.classList.remove("modal-open");
+  }
 }
 
 function handleFavoritesOverlayKeydown(event) {
@@ -519,8 +633,33 @@ function handleFavoritesOverlayKeydown(event) {
   }
 }
 
+function closeHiddenOverlay() {
+  const existingModal = document.querySelector(".hidden-modal");
+
+  if (existingModal) {
+    existingModal.remove();
+  }
+
+  document.removeEventListener("keydown", handleHiddenOverlayKeydown);
+  if (!document.querySelector(".favorites-modal")) {
+    document.body.classList.remove("modal-open");
+  }
+}
+
+function handleHiddenOverlayKeydown(event) {
+  if (event.key === "Escape") {
+    closeHiddenOverlay();
+  }
+}
+
+function closeAllOverlays() {
+  closeFavoritesOverlay();
+  closeHiddenOverlay();
+}
+
 function renderOutfitCard(outfit, mode) {
   const saved = isSaved(outfit.id);
+  const hidden = isHidden(outfit.id);
   const detailHref = `outfit.html?id=${encodeURIComponent(outfit.id)}`;
   const buttonAction = mode === "remove" ? "remove-save" : "toggle-save";
   const buttonText = mode === "remove" ? "移除" : saved ? "已收集灵感" : "收藏";
@@ -538,9 +677,14 @@ function renderOutfitCard(outfit, mode) {
       </div>
       <div class="card-body">
         <div class="card-title-bar">
-          <button class="detail-heart-button card-heart-button${saved ? " is-active" : ""}" type="button" data-action="toggle-save" data-id="${escapeAttribute(outfit.id)}" aria-label="${saved ? "取消收藏" : "收藏"}" aria-pressed="${saved}">
-            ${saved ? "&#9829;" : "&#9825;"}
-          </button>
+          <div class="card-icon-actions">
+            <button class="detail-heart-button card-heart-button${saved ? " is-active" : ""}" type="button" data-action="toggle-save" data-id="${escapeAttribute(outfit.id)}" aria-label="${saved ? "取消收藏" : "收藏"}" aria-pressed="${saved}">
+              ${saved ? "&#9829;" : "&#9825;"}
+            </button>
+            <button class="detail-hide-button card-hide-button${hidden ? " is-active" : ""}" type="button" data-action="toggle-hide" data-id="${escapeAttribute(outfit.id)}" aria-label="${hidden ? "取消隐藏" : "隐藏"}" aria-pressed="${hidden}">
+              <span class="hide-heart-icon" aria-hidden="true"></span>
+            </button>
+          </div>
           <a class="card-view-more" href="${detailHref}" data-return-look-id="${escapeAttribute(outfit.id)}">VIEW MORE</a>
         </div>
         <h2 class="card-title">${escapeHtml(outfit.title)}</h2>
@@ -554,6 +698,7 @@ function renderOutfitCard(outfit, mode) {
 
 function renderDetail(outfit) {
   const saved = isSaved(outfit.id);
+  const hidden = isHidden(outfit.id);
   const items = sortPieces(normalizePieces(outfit.items));
 
   return `
@@ -563,9 +708,14 @@ function renderDetail(outfit) {
       </div>
       <div class="detail-content">
         <div class="card-title-bar detail-title-bar">
-          <button class="detail-heart-button card-heart-button${saved ? " is-active" : ""}" type="button" data-action="toggle-save" data-id="${escapeAttribute(outfit.id)}" aria-label="${saved ? "取消收藏" : "收藏"}" aria-pressed="${saved}">
-            ${saved ? "&#9829;" : "&#9825;"}
-          </button>
+          <div class="card-icon-actions">
+            <button class="detail-heart-button card-heart-button${saved ? " is-active" : ""}" type="button" data-action="toggle-save" data-id="${escapeAttribute(outfit.id)}" aria-label="${saved ? "取消收藏" : "收藏"}" aria-pressed="${saved}">
+              ${saved ? "&#9829;" : "&#9825;"}
+            </button>
+            <button class="detail-hide-button card-hide-button${hidden ? " is-active" : ""}" type="button" data-action="toggle-hide" data-id="${escapeAttribute(outfit.id)}" aria-label="${hidden ? "取消隐藏" : "隐藏"}" aria-pressed="${hidden}">
+              <span class="hide-heart-icon" aria-hidden="true"></span>
+            </button>
+          </div>
           <a class="card-view-more detail-back-action" href="list.html?${LOOK_RETURN_PARAM}=${encodeURIComponent(outfit.id)}">BACK</a>
         </div>
         <h1 class="detail-title">${escapeHtml(outfit.title)}</h1>
@@ -1084,6 +1234,22 @@ function wireSaveButtons(scope) {
   });
 }
 
+function wireHideButtons(scope) {
+  scope.querySelectorAll("[data-action='toggle-hide']").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleHiddenLook(button.dataset.id);
+      updateHideButtons(button.dataset.id);
+      refreshListPage();
+
+      if (document.body.dataset.page === "detail" && isHidden(button.dataset.id)) {
+        leaveHiddenDetail(button.dataset.id);
+      }
+    });
+  });
+}
+
 function pulseSaveButton(button) {
   button.classList.remove("is-pulsing");
   button.offsetHeight;
@@ -1120,10 +1286,33 @@ function updateSaveButtons(id) {
   });
 }
 
+function updateHideButtons(id) {
+  const hidden = isHidden(id);
+
+  document.querySelectorAll("[data-action='toggle-hide']").forEach((button) => {
+    if (button.dataset.id !== id) {
+      return;
+    }
+
+    button.classList.toggle("is-active", hidden);
+    button.setAttribute("aria-label", hidden ? "取消隐藏" : "隐藏");
+    button.setAttribute("aria-pressed", String(hidden));
+  });
+}
+
 function getSavedLooks() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     return Array.isArray(saved) ? saved : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function getHiddenLooks() {
+  try {
+    const hidden = JSON.parse(localStorage.getItem(HIDDEN_STORAGE_KEY) || "[]");
+    return Array.isArray(hidden) ? hidden : [];
   } catch (error) {
     return [];
   }
@@ -1137,8 +1326,20 @@ function saveLooks(ids) {
   }
 }
 
+function saveHiddenLooks(ids) {
+  try {
+    localStorage.setItem(HIDDEN_STORAGE_KEY, JSON.stringify(ids));
+  } catch (error) {
+    // localStorage may be unavailable in strict privacy modes.
+  }
+}
+
 function isSaved(id) {
   return getSavedLooks().includes(id);
+}
+
+function isHidden(id) {
+  return getHiddenLooks().includes(id);
 }
 
 function toggleSavedLook(id) {
@@ -1154,6 +1355,34 @@ function toggleSavedLook(id) {
 
 function removeSavedLook(id) {
   saveLooks(getSavedLooks().filter((savedId) => savedId !== id));
+}
+
+function toggleHiddenLook(id) {
+  const hidden = getHiddenLooks();
+
+  if (hidden.includes(id)) {
+    saveHiddenLooks(hidden.filter((hiddenId) => hiddenId !== id));
+    return;
+  }
+
+  saveHiddenLooks([...hidden, id]);
+}
+
+function removeHiddenLook(id) {
+  saveHiddenLooks(getHiddenLooks().filter((hiddenId) => hiddenId !== id));
+}
+
+function refreshListPage() {
+  if (typeof window.__outfitListRefresh === "function") {
+    window.__outfitListRefresh();
+  }
+}
+
+function leaveHiddenDetail(id) {
+  const returnUrl = createLookReturnUrl(id) || "list.html";
+  const targetUrl = new URL(returnUrl, window.location.origin);
+  targetUrl.searchParams.delete(LOOK_RETURN_PARAM);
+  window.location.href = targetUrl.href;
 }
 
 function wireImageFallbacks(scope) {
